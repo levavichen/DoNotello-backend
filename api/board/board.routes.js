@@ -5,25 +5,20 @@ import { log } from '../../middlewares/logger.middleware.js'
 
 import { getBoards, getBoardById, addBoard, updateBoard, removeBoard, addBoardMsg, removeBoardMsg } from './board.controller.js'
 
-const router = express.Router()
+export const boardRoutes = express.Router()
 
 // We can add a middleware for the entire router:
 // router.use(requireAuth)
 
-router.get('/', log, getBoards)
-router.get('/:id', log, getBoardById)
-router.post('/', log, addBoard)
-// router.post('/', log, requireAuth, addBoard)
-router.put('/:id', updateBoard)
+boardRoutes.get('/', log, getBoards)
+boardRoutes.get('/:id', log, getBoardById)
+boardRoutes.post('/', log, addBoard)
+// boardRoutes.post('/', log, requireAuth, addBoard)
+boardRoutes.put('/:id', updateBoard)
+// boardRoutes.put('/:id', requireAuth, updateBoard)
+boardRoutes.delete('/:id', removeBoard)
+// boardRoutes.delete('/:id', requireAuth, removeBoard)
+// boardRoutes.delete('/:id', requireAuth, requireAdmin, removeBoard)
 
-// router.put('/:id', requireAuth, updateBoard)
-router.delete('/:id', removeBoard)
-
-// router.delete('/:id', requireAuth, removeBoard)
-
-// router.delete('/:id', requireAuth, requireAdmin, removeBoard)
-
-router.post('/:id/msg', requireAuth, addBoardMsg)
-router.delete('/:id/msg/:msgId', requireAuth, removeBoardMsg)
-
-export const boardRoutes = router
+boardRoutes.post('/:id/msg', requireAuth, addBoardMsg)
+boardRoutes.delete('/:id/msg/:msgId', requireAuth, removeBoardMsg)
