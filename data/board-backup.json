@@ -1,0 +1,256 @@
+{
+    "title": "DoNotello - DEMO",
+    "workspace": 1,
+    "isStarred": true,
+    "archivedAt": null,
+    "createdBy": {},
+    "style": {
+        "backgroundImage": "/imgs/board7.jpg"
+    },
+    "labels": [
+        {
+            "id": "l101",
+            "title": "Feature",
+            "color": "#533f03"
+        },
+        {
+            "id": "l102",
+            "title": "Bug",
+            "color": "#e1b205"
+        },
+        {
+            "id": "l103",
+            "title": "Refactor",
+            "color": "#a64700"
+        },
+        {
+            "id": "l104",
+            "title": "Important",
+            "color": "#ae2e24"
+        },
+        {
+            "id": "l105",
+            "title": "SOS",
+            "color": "#f87168"
+        },
+        {
+            "id": "l106",
+            "title": "Ideas",
+            "color": "#0055cc"
+        },
+        {
+            "id": "l107",
+            "title": "Not urgent",
+            "color": "#4d6b1f"
+        },
+        {
+            "id": "l108",
+            "title": "Design",
+            "color": "#50253f"
+        }
+    ],
+    "members": [
+        {
+            "id": "C101",
+            "fullname": "Chen Levavi",
+            "username": "@chenlevavi",
+            "imgUrl": "https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/chen_fwdvsr.jpg"
+        },
+        {
+            "id": "S101",
+            "fullname": "Shlomit Horn",
+            "username": "@shlomithorn",
+            "imgUrl": "https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/shlomit_ggjyyr.png"
+        },
+        {
+            "id": "K101",
+            "fullname": "Keren Vasserman",
+            "username": "@kerenvasserman",
+            "imgUrl": "https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/keren_vw7vmq.png"
+        },
+        {
+            "id": "B101",
+            "fullname": "Beyonce Knowles",
+            "username": "@beyonceknowles",
+            "imgUrl": "https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784864/beyonce_spjmuf.webp"
+        },
+        {
+            "id": "BA101",
+            "fullname": "Batel Katiei",
+            "username": "@BatelKatiei",
+            "imgUrl": "https://res.cloudinary.com/dtyqjifzy/image/upload/v1737323551/batel_nxojap.jpg"
+        },
+        {
+            "id": "L101",
+            "fullname": "Lord Vold",
+            "username": "@lordvold"
+        }
+    ],
+    "groups": [
+        {
+            "id": "sCs6Ga",
+            "title": "In development",
+            "cards": [
+                {
+                    "id": "HStoBl",
+                    "title": "API",
+                    "memberIds": [],
+                    "labelIds": [],
+                    "description": ""
+                },
+                {
+                    "id": "oCBhNy",
+                    "title": "Members",
+                    "memberIds": [
+                        "C101",
+                        "S101"
+                    ],
+                    "labelIds": [],
+                    "description": ""
+                }
+            ],
+            "isStarred": false,
+            "style": {}
+        },
+        {
+            "id": "o0pYLR",
+            "title": "Done",
+            "cards": [
+                {
+                    "id": "UCSEeq",
+                    "title": "Vars",
+                    "memberIds": [],
+                    "labelIds": [],
+                    "description": ""
+                },
+                {
+                    "id": "MSiQ0v",
+                    "title": "Planning the cmps tree",
+                    "memberIds": [],
+                    "labelIds": [],
+                    "description": ""
+                },
+                {
+                    "id": "DrBy5r",
+                    "title": "snippet",
+                    "memberIds": [],
+                    "labelIds": [],
+                    "description": ""
+                }
+            ],
+            "isStarred": false,
+            "style": {}
+        },
+        {
+            "id": "dWh89u",
+            "title": "Backlog-client",
+            "cards": [
+                {
+                    "id": "wGWZjC",
+                    "title": "Add card details",
+                    "memberIds": [
+                        "C101"
+                    ],
+                    "labelIds": [],
+                    "description": ""
+                },
+                {
+                    "id": "Wzh7v6",
+                    "title": "Icons",
+                    "memberIds": [],
+                    "labelIds": [],
+                    "description": ""
+                },
+                {
+                    "id": "VnWzqr",
+                    "title": "Implement",
+                    "memberIds": [
+                        "C101",
+                        "K101",
+                        "BA101"
+                    ],
+                    "labelIds": [
+                        "l102",
+                        "l105",
+                        "l103",
+                        "l107"
+                    ],
+                    "description": "hello \n\n\nbye"
+                }
+            ],
+            "isStarred": false,
+            "style": {}
+        },
+        {
+            "id": "4v01GQ",
+            "title": "QA",
+            "cards": [
+                {
+                    "id": "1uXeDz",
+                    "title": "Unit testing",
+                    "memberIds": [],
+                    "labelIds": [],
+                    "description": ""
+                },
+                {
+                    "id": "xXjRf0",
+                    "title": "Code refactoring for performance",
+                    "memberIds": [],
+                    "labelIds": [],
+                    "description": ""
+                },
+                {
+                    "id": "MqnOqv",
+                    "title": "Build basic template",
+                    "memberIds": [],
+                    "labelIds": [],
+                    "description": ""
+                },
+                {
+                    "id": "uPfhYj",
+                    "title": "Check data",
+                    "memberIds": [],
+                    "labelIds": [],
+                    "description": ""
+                },
+                {
+                    "id": "eMTjVb",
+                    "title": "Check QA",
+                    "memberIds": [],
+                    "labelIds": [],
+                    "description": ""
+                }
+            ],
+            "isStarred": false,
+            "style": {}
+        },
+        {
+            "id": "b3HlA6",
+            "title": "Ready to production",
+            "cards": [
+                {
+                    "id": "katDdc",
+                    "title": "BoardDetails",
+                    "memberIds": [],
+                    "labelIds": [],
+                    "description": ""
+                },
+                {
+                    "id": "aJdYdk",
+                    "title": "SideBar",
+                    "memberIds": [
+                        "C101"
+                    ],
+                    "labelIds": [
+                        "l101"
+                    ],
+                    "description": "this card is amazing"
+                }
+            ],
+            "isStarred": false,
+            "style": {}
+        }
+    ],
+    "activities": [],
+    "_id": "S5IZwn"
+}

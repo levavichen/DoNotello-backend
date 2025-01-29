@@ -17,25 +17,37 @@ export const boardService = {
     removeBoardMsg,
 }
 
-async function query(filterBy = { txt: '' }) {
+async function query(filterBy = {}) {
     try {
-        const criteria = _buildCriteria(filterBy)
-        const sort = _buildSort(filterBy)
 
         const collection = await dbService.getCollection('board')
-        var boardCursor = await collection.find(criteria, { sort })
-
-        if (filterBy.pageIdx !== undefined) {
-            boardCursor.skip(filterBy.pageIdx * PAGE_SIZE).limit(PAGE_SIZE)
-        }
-
-        const boards = boardCursor.toArray()
+        const boards = await collection.find({}).toArray()
         return boards
     } catch (err) {
         logger.error('cannot find boards', err)
         throw err
     }
 }
+
+// async function query(filterBy = { txt: '' }) {
+//     try {
+//         const criteria = _buildCriteria(filterBy)
+//         const sort = _buildSort(filterBy)
+
+//         const collection = await dbService.getCollection('board')
+//         var boardCursor = await collection.find(criteria, { sort })
+
+//         if (filterBy.pageIdx !== undefined) {
+//             boardCursor.skip(filterBy.pageIdx * PAGE_SIZE).limit(PAGE_SIZE)
+//         }
+
+//         const boards = boardCursor.toArray()
+//         return boards
+//     } catch (err) {
+//         logger.error('cannot find boards', err)
+//         throw err
+//     }
+// }
 
 async function getById(boardId) {
     try {
@@ -53,15 +65,15 @@ async function getById(boardId) {
 }
 
 async function remove(boardId) {
-    const { loggedinUser } = asyncLocalStorage.getStore()
-    const { _id: ownerId, isAdmin } = loggedinUser
+    // const { loggedinUser } = asyncLocalStorage.getStore()
+    // const { _id: ownerId, isAdmin } = loggedinUser
 
     try {
         const criteria = {
             _id: ObjectId.createFromHexString(boardId),
         }
 
-        if (!isAdmin) criteria['owner._id'] = ownerId
+        // if (!isAdmin) criteria['owner._id'] = ownerId
 
         const collection = await dbService.getCollection('board')
         const res = await collection.deleteOne(criteria)
@@ -87,7 +99,17 @@ async function add(board) {
 }
 
 async function update(board) {
-    const boardToSave = { vendor: board.vendor, speed: board.speed }
+    const boardToSave = {
+        title: board.title,
+        workspace: board.workspace,
+        isStarred: board.isStarred,
+        archivedAt: board.archivedAt,
+        createdBy: board.createdBy,
+        style: { backgroundImage: board.style.backgroundImage },
+        labels: board.labels,
+        members: board.members,
+        groups: board.groups,
+    }
 
     try {
         const criteria = { _id: ObjectId.createFromHexString(board._id) }

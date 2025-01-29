@@ -3,14 +3,17 @@ import { boardService } from './board.service.js'
 
 export async function getBoards(req, res) {
     try {
-        const filterBy = {
-            txt: req.query.txt || '',
-            minSpeed: +req.query.minSpeed || 0,
-            sortField: req.query.sortField || '',
-            sortDir: req.query.sortDir || 1,
-            pageIdx: req.query.pageIdx,
-        }
-        const boards = await boardService.query(filterBy)
+        // const filterBy = {
+        //     txt: req.query.txt || '',
+        //     minSpeed: +req.query.minSpeed || 0,
+        //     sortField: req.query.sortField || '',
+        //     sortDir: req.query.sortDir || 1,
+        //     pageIdx: req.query.pageIdx,
+        // }
+        // const boards = await boardService.query(filterBy)
+        const boards = await boardService.query()
+        console.log(boards)
+
         res.json(boards)
     } catch (err) {
         logger.error('Failed to get boards', err)
@@ -43,13 +46,14 @@ export async function addBoard(req, res) {
 }
 
 export async function updateBoard(req, res) {
-    const { loggedinUser, body: board } = req
-    const { _id: userId, isAdmin } = loggedinUser
+    const { body: board } = req
+    // const { loggedinUser, body: board } = req
+    // const { _id: userId, isAdmin } = loggedinUser
 
-    if (!isAdmin && board.owner._id !== userId) {
-        res.status(403).send('Not your board...')
-        return
-    }
+    // if (!isAdmin && board.owner._id !== userId) {
+    //     res.status(403).send('Not your board...')
+    //     return
+    // }
 
     try {
         const updatedBoard = await boardService.update(board)

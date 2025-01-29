@@ -1,5 +1,4 @@
 import http from 'http'
-import path from 'path'
 import cors from 'cors'
 import express from 'express'
 import cookieParser from 'cookie-parser'
@@ -7,10 +6,14 @@ import cookieParser from 'cookie-parser'
 import { authRoutes } from './api/auth/auth.routes.js'
 import { userRoutes } from './api/user/user.routes.js'
 import { reviewRoutes } from './api/review/review.routes.js'
-import { boardRoutes } from './api/board/car.routes.js'
+import { boardRoutes } from './api/board/board.routes.js'
 import { setupSocketAPI } from './services/socket.service.js'
-
+import path, { dirname } from 'path'
+import { fileURLToPath } from 'url'
 import { setupAsyncLocalStorage } from './middlewares/setupAls.middleware.js'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const app = express()
 const server = http.createServer(app)
@@ -18,9 +21,12 @@ const server = http.createServer(app)
 // Express App Config
 app.use(cookieParser())
 app.use(express.json())
+app.use(express.static('public'))
+
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.resolve('public')))
+    app.use(express.static(path.resolve(__dirname, 'public')))
+    console.log('__dirname: ', __dirname)
 } else {
     const corsOptions = {
         origin: [
@@ -39,7 +45,7 @@ app.all('*', setupAsyncLocalStorage)
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/review', reviewRoutes)
-app.use('/api/car', boardRoutes)
+app.use('/api/board', boardRoutes)
 
 setupSocketAPI(server)
 
