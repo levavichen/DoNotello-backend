@@ -4,11 +4,12 @@ import { requireAuth, requireAdmin } from '../../middlewares/requireAuth.middlew
 
 import { getUser, getUsers, deleteUser, updateUser } from './user.controller.js'
 
-const router = express.Router()
+export const userRoutes = express.Router()
 
-router.get('/', getUsers)
-router.get('/:id', getUser)
-router.put('/:id', requireAuth, updateUser)
-router.delete('/:id', requireAuth, requireAdmin, deleteUser)
+userRoutes.get('/', getUsers)
+userRoutes.get('/:id', getUser)
+userRoutes.put('/:id', updateUser)
+// router.put('/:id', requireAuth, updateUser)
 
-export const userRoutes = router
+userRoutes.delete('/:id', deleteUser)
+// router.delete('/:id', requireAuth, requireAdmin, deleteUser)

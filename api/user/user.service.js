@@ -12,16 +12,14 @@ export const userService = {
     getByUsername, // Used for Login
 }
 
+
 async function query(filterBy = {}) {
-    const criteria = _buildCriteria(filterBy)
     try {
         const collection = await dbService.getCollection('user')
-        var users = await collection.find(criteria).toArray()
+        var users = await collection.find({}).toArray()
         users = users.map(user => {
             delete user.password
             user.createdAt = user._id.getTimestamp()
-            // Returning fake fresh data
-            // user.createdAt = Date.now() - (1000 * 60 * 60 * 24 * 3) // 3 days ago
             return user
         })
         return users
@@ -30,6 +28,26 @@ async function query(filterBy = {}) {
         throw err
     }
 }
+
+
+// async function query(filterBy = {}) {
+//     const criteria = _buildCriteria(filterBy)
+//     try {
+//         const collection = await dbService.getCollection('user')
+//         var users = await collection.find(criteria).toArray()
+//         users = users.map(user => {
+//             delete user.password
+//             user.createdAt = user._id.getTimestamp()
+//             // Returning fake fresh data
+//             // user.createdAt = Date.now() - (1000 * 60 * 60 * 24 * 3) // 3 days ago
+//             return user
+//         })
+//         return users
+//     } catch (err) {
+//         logger.error('cannot find users', err)
+//         throw err
+//     }
+// }
 
 async function getById(userId) {
     try {
@@ -41,11 +59,11 @@ async function getById(userId) {
 
         criteria = { byUserId: userId }
 
-        user.givenReviews = await reviewService.query(criteria)
-        user.givenReviews = user.givenReviews.map(review => {
-            delete review.byUser
-            return review
-        })
+        // user.givenReviews = await reviewService.query(criteria)
+        // user.givenReviews = user.givenReviews.map(review => {
+        //     delete review.byUser
+        //     return review
+        // })
 
         return user
     } catch (err) {
@@ -83,7 +101,10 @@ async function update(user) {
         const userToSave = {
             _id: ObjectId.createFromHexString(user._id), // needed for the returnd obj
             fullname: user.fullname,
-            score: user.score,
+            username: user.username,
+            password: user.password,
+            imgUrl: user.imgUrl || '',
+            mentions: [user.mentions] || [],
         }
         const collection = await dbService.getCollection('user')
         await collection.updateOne({ _id: userToSave._id }, { $set: userToSave })
@@ -96,15 +117,19 @@ async function update(user) {
 
 async function add(user) {
     try {
+        const existUser = await getByUsername(user.username)
+        if (existUser) throw new Error('Username taken')
+
         // peek only updatable fields!
+
         const userToAdd = {
+            fullname: user.fullname,
             username: user.username,
             password: user.password,
-            fullname: user.fullname,
-            imgUrl: user.imgUrl,
-            isAdmin: user.isAdmin,
-            score: 100,
+            imgUrl: user.imgUrl || '',
+            mentions: [user.mentions] || [],
         }
+
         const collection = await dbService.getCollection('user')
         await collection.insertOne(userToAdd)
         return userToAdd

@@ -32,6 +32,7 @@ export async function signup(req, res) {
 
         const loginToken = authService.getLoginToken(user)
         res.cookie('loginToken', loginToken, { sameSite: 'None', secure: true })
+        console.log(user)
         res.json(user)
     } catch (err) {
         logger.error('Failed to signup ' + err)
