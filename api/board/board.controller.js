@@ -57,6 +57,7 @@ export async function updateBoard(req, res) {
 
     try {
         const updatedBoard = await boardService.update(board)
+        console.log('updatedBoard', updatedBoard)
         res.json(updatedBoard)
     } catch (err) {
         logger.error('Failed to update board', err)

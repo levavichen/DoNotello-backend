@@ -105,7 +105,7 @@ async function update(board) {
         isStarred: board.isStarred,
         archivedAt: board.archivedAt,
         createdBy: board.createdBy,
-        style: { backgroundImage: board.style.backgroundImage },
+        style: board.style,
         labels: board.labels,
         members: board.members,
         groups: board.groups,
