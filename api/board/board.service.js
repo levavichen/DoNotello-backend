@@ -99,19 +99,20 @@ async function add(board) {
 }
 
 async function update(board) {
-    const boardToSave = {
-        title: board.title,
-        workspace: board.workspace,
-        isStarred: board.isStarred,
-        archivedAt: board.archivedAt,
-        createdBy: board.createdBy,
-        style: board.style,
-        labels: board.labels,
-        members: board.members,
-        groups: board.groups,
-    }
-
+    // console.log(JSON.stringify(board, null, 3));
     try {
+        const boardToSave = {
+            title: board.title,
+            workspace: board.workspace,
+            isStarred: board.isStarred,
+            archivedAt: board.archivedAt,
+            createdBy: board.createdBy,
+            style: board.style,
+            labels: board.labels,
+            members: board.members,
+            groups: board.groups,
+        }
+        
         const criteria = { _id: ObjectId.createFromHexString(board._id) }
         const collection = await dbService.getCollection('board')
         await collection.updateOne(criteria, { $set: boardToSave })

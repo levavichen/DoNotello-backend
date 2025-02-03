@@ -47,6 +47,8 @@ export async function addBoard(req, res) {
 
 export async function updateBoard(req, res) {
     const { body: board } = req
+    console.log('req body:',JSON.stringify(board, null, 3));
+
     // const { loggedinUser, body: board } = req
     // const { _id: userId, isAdmin } = loggedinUser
 
