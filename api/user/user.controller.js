@@ -20,7 +20,6 @@ export async function getUsers(req, res) {
         // }
         // const users = await userService.query(filterBy)
         const users = await userService.query()
-        console.log(users)
 
         res.send(users)
     } catch (err) {

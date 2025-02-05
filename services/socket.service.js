@@ -14,6 +14,7 @@ export function setupSocketAPI(http) {
         socket.on('disconnect', socket => {
             logger.info(`Socket disconnected [id: ${socket.id}]`)
         })
+        //i need this:
         socket.on('chat-set-topic', topic => {
             if (socket.myTopic === topic) return
             if (socket.myTopic) {
@@ -23,6 +24,7 @@ export function setupSocketAPI(http) {
             socket.join(topic)
             socket.myTopic = topic
         })
+        //board update:
         socket.on('chat-send-msg', msg => {
             logger.info(`New chat msg from socket [id: ${socket.id}], emitting to topic ${socket.myTopic}`)
             // emits to all sockets:
@@ -66,7 +68,7 @@ async function emitToUser({ type, data, userId }) {
 
 // If possible, send to all sockets BUT not the current socket 
 // Optionally, broadcast to a room / to all
-async function broadcast({ type, data, room = null, userId }) {
+export async function broadcast({ type, data, room = null, userId }) {
     userId = userId.toString()
     
     logger.info(`Broadcasting event: ${type}`)

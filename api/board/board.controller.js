@@ -1,6 +1,6 @@
 import { logger } from '../../services/logger.service.js'
 import { boardService } from './board.service.js'
-
+import { broadcast } from '../../services/socket.service.js'
 export async function getBoards(req, res) {
     try {
         // const filterBy = {
@@ -12,7 +12,7 @@ export async function getBoards(req, res) {
         // }
         // const boards = await boardService.query(filterBy)
         const boards = await boardService.query()
-        console.log(boards)
+        // console.log(boards)
 
         res.json(boards)
     } catch (err) {
@@ -47,7 +47,7 @@ export async function addBoard(req, res) {
 
 export async function updateBoard(req, res) {
     const { body: board } = req
-    console.log('req body:',JSON.stringify(board, null, 3));
+    console.log('req body:', JSON.stringify(board, null, 3));
 
     // const { loggedinUser, body: board } = req
     // const { _id: userId, isAdmin } = loggedinUser
@@ -59,7 +59,9 @@ export async function updateBoard(req, res) {
 
     try {
         const updatedBoard = await boardService.update(board)
-        console.log('updatedBoard', updatedBoard)
+        // console.log('updatedBoard', updatedBoard)
+        //broadcast socket with board groups
+        // broadcast({ type: 'update-board', data: updatedBoard.groups, room: updatedBoard._id })
         res.json(updatedBoard)
     } catch (err) {
         logger.error('Failed to update board', err)
