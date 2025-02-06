@@ -46,11 +46,8 @@ export async function addBoard(req, res) {
 }
 
 export async function updateBoard(req, res) {
-    const { body: board } = req
-    console.log('req body:', JSON.stringify(board, null, 3));
-
-    // const { loggedinUser, body: board } = req
-    // const { _id: userId, isAdmin } = loggedinUser
+    const { loggedinUser, body: board } = req
+    const { _id: userId } = loggedinUser
 
     // if (!isAdmin && board.owner._id !== userId) {
     //     res.status(403).send('Not your board...')
@@ -59,9 +56,8 @@ export async function updateBoard(req, res) {
 
     try {
         const updatedBoard = await boardService.update(board)
-        // console.log('updatedBoard', updatedBoard)
         //broadcast socket with board groups
-        // broadcast({ type: 'update-board', data: updatedBoard.groups, room: updatedBoard._id })
+        broadcast({ type: 'board-updated', data: updatedBoard.groups, room: updatedBoard._id, userId })
         res.json(updatedBoard)
     } catch (err) {
         logger.error('Failed to update board', err)
