@@ -2,21 +2,23 @@ import configProd from './prod.js'
 import configDev from './dev.js'
 
 
-export var config = {
-    isGuestMode: true,
-    ...configProd
-}
-
-// if (process.env.NODE_ENV === 'production') {
-//     config = configProd
-// } else {
-//     config = configDev
+// export var config = {
+//     isGuestMode: true,
+//     ...configProd
 // }
+
+export var config
+
+if (process.env.NODE_ENV === 'production') {
+    config = configProd
+} else {
+    config = configDev
+}
 
 
 
 // * Uncomment the following line to use guest mode
-config.isGuestMode = true
+// config.isGuestMode = true
 
 
 //* Uncomment the following line to use the production configuration (Mongo Atlas DB)
